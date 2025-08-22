@@ -84,7 +84,7 @@ vim.keymap.set({ "n", "i" }, "<D-s>", function()
 end, { expr = false, silent = true, noremap = true, remap = true })
 vim.keymap.set({ "n", "i" }, "<C-s>", function()
 	if vim.bo.modified then
-		format_file()
+		--format_file()
 		save_file()
 	end
 end, { expr = false, silent = true, noremap = true, remap = true })

@@ -8,6 +8,8 @@ return {
 				python = { "isort", "black" },
 				rust = { "rustfmt", lsp_format = "fallback" },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
+				typescript = { 'prettierd', "prettier" },
+				typescriptreact = { "prettierd", "prettier" },
 				fish = { "fish_indent" },
 				sh = { "shfmt" },
 			},
@@ -18,7 +20,7 @@ return {
 				lsp_format = "fallback",
 			},
 			format_on_save = {
-				timeout_ms = 50,
+				timeout_ms = 5000,
 				lsp_format = "fallback",
 			},
 			log_level = vim.log.levels.ERROR,
