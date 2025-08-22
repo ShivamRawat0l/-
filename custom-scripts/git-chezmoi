@@ -1,0 +1,6 @@
+#!/bin/sh
+cd /Users/shivamrawat/.local/share/chezmoi
+rm -rf dot_config
+chezmoi add ~/.config
+chezmoi re-add
+
