@@ -12,8 +12,9 @@ return {
 		"onsails/lspkind.nvim",
 	},
 	config = function()
-		local lspconfig = require('lspconfig')
-		lspconfig.sourcekit.setup({
+		--local lspconfig = require('lspconfig')
+		local lspconfig = vim.lsp.config
+		vim.lsp.enable('sourcekit', {
 			capabilities = {
 				workspace = {
 					didChangeWatchedFiles = {
@@ -22,6 +23,19 @@ return {
 				},
 			},
 		})
+		vim.lsp.config.sourcekit = {
+			cmd = { 'sourcekit-lsp' },
+			filetypes = { 'swift', 'c', 'cpp', 'objective-c', 'objective-cpp' },
+			root_markers = { 'Package.swift', '.git' },
+			capabilities = {
+				workspace = {
+					didChangeWatchedFiles = {
+						dynamicRegistration = true,
+					},
+				},
+			},
+		}
+
 		local cmp = require('cmp')
 		local cmp_lsp = require("cmp_nvim_lsp")
 		local capabilities = vim.tbl_deep_extend(
@@ -40,7 +54,7 @@ return {
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
-					require("lspconfig")[server_name].setup {
+					vim.lsp.enable(server_name).setup {
 						capabilities = capabilities
 					}
 				end,
@@ -93,7 +107,7 @@ return {
 						cmp.select_next_item()
 					end
 				end,
-				['C-p>'] = cmp.mapping.select_prev_item(),
+				['<C-p>'] = cmp.mapping.select_prev_item(),
 				['<CR>'] = cmp.mapping.confirm({ select = true }),
 				['<C-y>'] = cmp.mapping.confirm({ select = true }),
 				["<C-Space>"] = cmp.mapping.complete(),
@@ -157,7 +171,7 @@ return {
 				prefix = "",
 			},
 		})
-		lspconfig.rust_analyzer.setup {
+		vim.lsp.enable('rust_analyzer', {
 			settings = {
 				['rust-analyzer'] = {
 					diagnostics = {
@@ -165,6 +179,6 @@ return {
 					}
 				}
 			}
-		}
+		})
 	end
 }

@@ -25,7 +25,7 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- This is going to get me cancelled
-vim.keymap.set("i", "<C-c>", "<Esc>")
+vim.keymap.set("i", "<C-c>", "<Esc>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>f", function()
 	vim.lsp.buf.format({
@@ -48,3 +48,11 @@ vim.keymap.set("n", "VV", "<C-v>", { noremap = true, silent = true })
 
 --vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>',
 --{ noremap = true, silent = true })
+vim.keymap.set("n", "<C-=>", "<cmd>CopilotChatToggle<cr>")
+vim.keymap.set("i", "<Tab>", function()
+	if require('copilot.suggestion').is_visible() then
+		require('copilot.suggestion').accept()
+	else
+		return "<Tab>"
+	end
+end, { expr = true, silent = true })

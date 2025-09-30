@@ -40,6 +40,8 @@ local function format_file()
 end
 
 local function save_file()
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), "n", false)
+	vim.cmd('stopinsert')
 	vim.cmd('write')
 end
 --[[
